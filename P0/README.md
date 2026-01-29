@@ -9,3 +9,5 @@ Probando el VSCode...
 Otro cambio
 
 Cambio remoto
+
+![](Ejercicio2-img1.gif)
