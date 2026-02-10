@@ -138,6 +138,17 @@ img {
     to { transform: scale(1.1); opacity: 1; }
 }
 
+/* Efecto interactivo al pasar el ratón sobre la imagen */
+.foto-wanda:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/*Efecto interactivo al pasar el raton, aumenta el brillo de la tarjeta*/
+#c1:hover, #c2:hover {
+    box-shadow: 0 0 40px rgba(255,0,0,0.6);
+    transition: 0.5s;
+}
 /* Firma centrada */
 .firma {
     margin-top: 40px;
