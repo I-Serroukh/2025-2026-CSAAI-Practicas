@@ -1,74 +1,12 @@
+/* ===================== GLOBAL ======================== */
+
 /* https://www.w3schools.com/howto/howto_css_two_columns.asp */
 /* https://developer.mozilla.org/es/docs/Web/CSS/box-sizing */
-/* Así definimos el comportamiento de caja para todos los elementos */
 
 /* Definimos box-sizing global */
 * {
     box-sizing: border-box;
 }
-
-/* Crear columnas de ancho diferente que se colocan una a continuación de la otra */
-.columna {
-    float: left;
-    padding: 10px;
-    min-height: 500px;
-}
-
-.izquierda {
-    width: 25%;
-}
-
-.derecha {
-    width: 75%;
-}
-
-/* Espacio lateral para que se vea el fondo rojo */
-.fila {
-    width: 95%;          /* deja espacio en los lados */
-    margin: 40px auto;   /* espacio arriba y abajo */
-}
-
-/* Clear floats despues de las columnas para eliminar la superposición */
-.fila:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* Colores originales (serán sobreescritos más abajo con estilo Wanda) */
-#c1 {
-    background-color: #aaa;
-}
-
-#c2 {
-    background-color: #bbb;
-}
-
-/* Estilos para imágenes */
-img {
-    width: 100%;
-    height: auto;
-}
-
-/* Imágenes en columnas internas */
-.iresponsive {
-    padding: 0 6px;
-    float: left;
-    width: 50%;
-}
-
-/* Responsive layout original */
-@media screen and (max-width: 600px) {
-    .columna {
-        width: 100%;
-    }
-
-    .iresponsive {
-        width: 100%;
-    }
-}
-
-/* =============== ESTILO SCARLET WITCH ================ */
 
 /* Importamos fuentes elegantes estilo místico */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond&display=swap');
@@ -94,7 +32,6 @@ h1 {
     transition: 0.3s;
 }
 
-/* Efecto interactivo*/
 h1:hover {
     transform: scale(1.05);
 }
@@ -109,28 +46,8 @@ h2 {
     transition: 0.3s;
 }
 
-/* Efecto interactivo en títulos */
 h2:hover {
     transform: scale(1.02);
-}
-
-/* Sobrescribimos colores de columnas con estilo pergamino místico */
-#c1, #c2 {
-    background:
-        linear-gradient(rgba(255,240,240,0.92), rgba(255,235,235,0.92)),
-        url("https://www.transparenttextures.com/patterns/old-wall.png");
-    border: 4px solid #7a0000;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(255,0,0,0.4);
-}
-
-/* Línea decorativa en títulos internos */
-#c1 h2, #c2 h2 {
-    border-bottom: 3px solid #7a0000;
-    padding-bottom: 5px;
-    margin-top: 25px;
-    color: #5c0000;
-    text-shadow: none;
 }
 
 /* Texto */
@@ -145,7 +62,6 @@ ul {
     padding-left: 0;
 }
 
-/* Viñetas mágicas */
 li {
     margin: 8px 0;
     padding-left: 18px;
@@ -171,56 +87,7 @@ a.link:hover {
     text-shadow: 0 0 6px red;
 }
 
-/* Contenedor de la imagen con aura */
-.foto-wanda {
-    position: relative;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
-}
-
-/* Aura roja animada */
-.foto-wanda::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    border-radius: 20px;
-    background: radial-gradient(circle, rgba(255,0,0,0.5), transparent 70%);
-    animation: magia 3s infinite alternate;
-    z-index: 0;
-}
-
-/* Imagen encima del aura */
-.foto-wanda img {
-    position: relative;
-    z-index: 1;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255,0,0,0.4);
-}
-
-/* Animación aura */
-@keyframes magia {
-    from { transform: scale(1); opacity: 0.6; }
-    to { transform: scale(1.1); opacity: 1; }
-}
-
-/* Efecto hover columnas */
-#c1:hover, #c2:hover {
-    box-shadow: 0 0 40px rgba(255,0,0,0.6);
-    transition: 0.5s;
-}
-
-/* Efecto al pasar el mouse: agrandar la imagen */
-.foto-wanda img:hover {
-    transform: scale(1.05); /* aumenta 5% su tamaño */
-}
-
-/* ===================== */
-/* MENÚ HORIZONTAL       */
-/* ===================== */
-
+/* MENÚ */
 .menu {
     list-style: none;
     padding: 0;
@@ -249,7 +116,7 @@ a.link:hover {
     text-shadow: 0 0 6px red;
 }
 
-/* Firma centrada */
+/* Firma */
 .firma {
     margin-top: 40px;
     width: 150px;
@@ -263,31 +130,130 @@ a.link:hover {
     transform: scale(1.2);
 }
 
-/* Contenedor de imágenes lado a lado */
+/* ===================== INDEX ========================= */
+
+/* Crear columnas */
+.columna {
+    float: left;
+    padding: 10px;
+    min-height: 500px;
+}
+
+.izquierda {
+    width: 25%;
+}
+
+.derecha {
+    width: 75%;
+}
+
+.fila {
+    width: 95%;
+    margin: 40px auto;
+}
+
+.fila:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Colores originales */
+#c1 {
+    background-color: #aaa;
+}
+
+#c2 {
+    background-color: #bbb;
+}
+
+/* Sobrescribimos colores estilo pergamino */
+#c1, #c2 {
+    background:
+        linear-gradient(rgba(255,240,240,0.92), rgba(255,235,235,0.92)),
+        url("https://www.transparenttextures.com/patterns/old-wall.png");
+    border: 4px solid #7a0000;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255,0,0,0.4);
+}
+
+#c1 h2, #c2 h2 {
+    border-bottom: 3px solid #7a0000;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    color: #5c0000;
+    text-shadow: none;
+}
+
+#c1:hover, #c2:hover {
+    box-shadow: 0 0 40px rgba(255,0,0,0.6);
+    transition: 0.5s;
+}
+
+/* Imagen principal */
+img {
+    width: 100%;
+    height: auto;
+}
+
+.foto-wanda {
+    position: relative;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.foto-wanda::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border-radius: 20px;
+    background: radial-gradient(circle, rgba(255,0,0,0.5), transparent 70%);
+    animation: magia 3s infinite alternate;
+    z-index: 0;
+}
+
+.foto-wanda img {
+    position: relative;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255,0,0,0.4);
+}
+
+.foto-wanda img:hover {
+    transform: scale(1.05);
+}
+
+@keyframes magia {
+    from { transform: scale(1); opacity: 0.6; }
+    to { transform: scale(1.1); opacity: 1; }
+}
+
+/* ===================== ABOUT ========================= */
+
 .imagenes-about {
     display: flex;
     gap: 20px;
     margin: 20px 0;
 }
 
-/* Cada imagen ocupa la mitad */
 .imagen-about {
     flex: 1;
 }
 
-/* Asegura que no se deformen */
 .imagen-about img {
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255,0,0,0.5);
 }
 
-/* Efecto al pasar el mouse: agrandar la imagen */
 .imagen-about img:hover {
-    transform: scale(1.02); /* aumenta 2% su tamaño */
+    transform: scale(1.02);
 }
 
-/* TARJETAS PROYECTOS    */
+/* ===================== PROJECT ======================= */
 
 .cards-container {
     display: flex;
@@ -309,7 +275,6 @@ a.link:hover {
     transform: scale(1.02);
 }
 
-/* Botón */
 .boton {
     display: inline-block;
     margin-top: 10px;
@@ -325,14 +290,6 @@ a.link:hover {
     background: #ff0000;
 }
 
-/* Responsive tarjetas */
-@media screen and (max-width: 600px) {
-    .cards-container {
-        flex-direction: column;
-    }
-}
-
-/* Oculta el icono por defecto */
 summary {
     list-style: none;
     cursor: pointer;
@@ -340,12 +297,10 @@ summary {
     font-weight: bold;
 }
 
-/* Quitar flechita default */
 summary::-webkit-details-marker {
     display: none;
 }
 
-/* Estilo tipo botón */
 summary {
     background: #7a0000;
     color: white;
@@ -357,20 +312,18 @@ details[open] summary {
     background: #ff0000;
 }
 
-/* Espacio interno cuando se abre */
 details p {
     margin-top: 10px;
 }
 
-/* Alinear botón volver a la derecha */
 .volver {
     text-align: right;
     margin-top: 30px;
 }
 
 .imagen-project {
-    width: 80%;           /* ocupa solo parte del ancho */
-    margin: 20px auto;    /* centrada */
+    width: 80%;
+    margin: 20px auto;
 }
 
 .imagen-project img {
@@ -379,12 +332,14 @@ details p {
     box-shadow: 0 0 20px rgba(255,0,0,0.5);
 }
 
-/* Efecto al pasar el mouse: agrandar la imagen */
 .imagen-project img:hover {
-    transform: scale(1.02); /* aumenta 2% su tamaño */
+    transform: scale(1.02);
 }
 
-/* Responsive móvil */
+/* ===================== RESPONSIVE ==================== */
+
 @media screen and (max-width: 600px) {
     .columna { width: 100%; }
+    .iresponsive { width: 100%; }
+    .cards-container { flex-direction: column; }
 }
