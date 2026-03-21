@@ -1,3 +1,12 @@
+var audioActivado = false;
+
+function activarAudio() {
+    if (!audioActivado) {
+        sonidoClick.play().then(function(){ sonidoClick.pause(); sonidoClick.currentTime = 0; });
+        audioActivado = true;
+    }
+}
+
 // ===== SONIDOS =====
 var sonidoClick = new Audio("sounds/click.mp3");
 var sonidoAcierto = new Audio("sounds/success.mp3");
@@ -120,7 +129,7 @@ function nuevaPartida() {
 
 // ===== CLICK NUMEROS =====
 function manejarClick(boton) {
-
+    activarAudio();
     var num = parseInt(boton.textContent, 10);
 
     if (!juegoActivo) return;
