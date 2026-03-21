@@ -1,45 +1,56 @@
 // ===== SONIDOS =====
-const sonidoClick = new Audio("sounds/click.mp3");
-const sonidoAcierto = new Audio("sounds/success.mp3");
-const sonidoFallo = new Audio("sounds/fail.mp3");
-const sonidoVictoria = new Audio("sounds/win.mp3");
-const sonidoDerrota = new Audio("sounds/lose.mp3");
+var sonidoClick = new Audio("sounds/click.mp3");
+var sonidoAcierto = new Audio("sounds/success.mp3");
+var sonidoFallo = new Audio("sounds/fail.mp3");
+var sonidoVictoria = new Audio("sounds/win.mp3");
+var sonidoDerrota = new Audio("sounds/lose.mp3");
 
 // ===== CRONO =====
-class Crono {
-    constructor(display) {
-        this.display = display;
-        this.cent = 0;
-        this.seg = 0;
-        this.min = 0;
-        this.timer = null;
-    }
-
-    tic() {
-        this.cent++;
-        if (this.cent === 100) { this.seg++; this.cent = 0; }
-        if (this.seg === 60) { this.min++; this.seg = 0; }
-        this.display.textContent = `${this.min}:${this.seg}:${this.cent}`;
-    }
-
-    start() {
-        if (!this.timer) {
-            this.timer = setInterval(() => this.tic(), 10);
-        }
-    }
-
-    stop() {
-        clearInterval(this.timer);
-        this.timer = null;
-    }
-
-    reset() {
-        this.cent = 0;
-        this.seg = 0;
-        this.min = 0;
-        this.display.textContent = "0:0:0";
-    }
+function Crono(display) {
+    this.display = display;
+    this.cent = 0;
+    this.seg = 0;
+    this.min = 0;
+    this.timer = null;
 }
+
+Crono.prototype.tic = function () {
+    this.cent++;
+
+    if (this.cent === 100) {
+        this.seg++;
+        this.cent = 0;
+    }
+
+    if (this.seg === 60) {
+        this.min++;
+        this.seg = 0;
+    }
+
+    this.display.textContent = this.min + ":" + this.seg + ":" + this.cent;
+};
+
+Crono.prototype.start = function () {
+    var self = this;
+
+    if (!this.timer) {
+        this.timer = setInterval(function () {
+            self.tic();
+        }, 10);
+    }
+};
+
+Crono.prototype.stop = function () {
+    clearInterval(this.timer);
+    this.timer = null;
+};
+
+Crono.prototype.reset = function () {
+    this.cent = 0;
+    this.seg = 0;
+    this.min = 0;
+    this.display.textContent = "0:0:0";
+};
 
 // ===== BLOQUEAR CONTROLES =====
 function bloquearControles() {
@@ -47,29 +58,36 @@ function bloquearControles() {
     document.getElementById("stop").disabled = true;
 }
 
+// ===== FUNCIÓN AUXILIAR (SIN WARNING) =====
+function quitarMagia(elemento) {
+    setTimeout(function () {
+        elemento.classList.remove("magic");
+    }, 400);
+}
+
 // ===== VARIABLES =====
-let clave = [];
-let intentos = 7;
-let usados = new Set();
-let juegoActivo = false;
+var clave = [];
+var intentos = 7;
+var usados = [];
+var juegoActivo = false;
 
-const casillas = document.querySelectorAll(".secret div");
-const botones = document.querySelectorAll(".num");
-const displayIntentos = document.getElementById("intentos");
-const displayTiempo = document.getElementById("tiempo");
-const mensaje = document.getElementById("mensaje");
-const btnStart = document.getElementById("start");
-const btnStop = document.getElementById("stop");
+var casillas = document.querySelectorAll(".secret div");
+var botones = document.querySelectorAll(".num");
+var displayIntentos = document.getElementById("intentos");
+var displayTiempo = document.getElementById("tiempo");
+var mensaje = document.getElementById("mensaje");
+var btnStart = document.getElementById("start");
+var btnStop = document.getElementById("stop");
 
-const crono = new Crono(displayTiempo);
+var crono = new Crono(displayTiempo);
 
 // ===== GENERAR CLAVE =====
 function generarClave() {
-    let nums = [...Array(10).keys()];
+    var nums = [0,1,2,3,4,5,6,7,8,9];
     clave = [];
 
     while (clave.length < 4) {
-        let i = Math.floor(Math.random() * nums.length);
+        var i = Math.floor(Math.random() * nums.length);
         clave.push(nums.splice(i, 1)[0]);
     }
 }
@@ -78,20 +96,21 @@ function generarClave() {
 function nuevaPartida() {
     generarClave();
     intentos = 7;
-    usados.clear();
+    usados = [];
     juegoActivo = true;
 
     displayIntentos.textContent = intentos;
 
-    casillas.forEach(c => {
-        c.textContent = "*";
-        c.className = "";
-    });
+    var i;
+    for (i = 0; i < casillas.length; i++) {
+        casillas[i].textContent = "*";
+        casillas[i].className = "";
+    }
 
-    botones.forEach(b => {
-        b.disabled = false;
-        b.classList.remove("used");
-    });
+    for (i = 0; i < botones.length; i++) {
+        botones[i].disabled = false;
+        botones[i].classList.remove("used");
+    }
 
     mensaje.textContent = "Nueva partida preparada. Pulsa Start o un número para comenzar.";
     mensaje.className = "msg-info";
@@ -100,74 +119,97 @@ function nuevaPartida() {
 }
 
 // ===== CLICK NUMEROS =====
-botones.forEach(boton => {
-    boton.addEventListener("click", () => {
+function manejarClick(boton) {
 
-        let num = parseInt(boton.textContent);
+    var num = parseInt(boton.textContent, 10);
 
-        if (!juegoActivo) return;
+    if (!juegoActivo) return;
 
-        sonidoClick.play();
+    sonidoClick.play();
 
-        if (!crono.timer) {
-            crono.start();
+    if (!crono.timer) {
+        crono.start();
+        btnStop.classList.remove("stop-activo");
+
+        mensaje.textContent = "Cronómetro en marcha.";
+        mensaje.className = "msg-info";
+    }
+
+    if (usados.indexOf(num) !== -1) return;
+
+    usados.push(num);
+    boton.disabled = true;
+    boton.classList.add("used");
+
+    intentos--;
+    displayIntentos.textContent = intentos;
+
+    var acierto = false;
+    var i;
+
+    for (i = 0; i < clave.length; i++) {
+        if (clave[i] === num) {
+
+            casillas[i].textContent = num;
+            casillas[i].classList.add("correct", "magic");
+
+            quitarMagia(casillas[i]);
+
+            acierto = true;
         }
+    }
 
-        if (usados.has(num)) return;
+    if (acierto) {
+        sonidoAcierto.play();
+        mensaje.textContent = "Has acertado el número " + num + ". Sigue así";
+        mensaje.className = "msg-ok";
+    } else {
+        sonidoFallo.play();
+        mensaje.textContent = "El número " + num + " no está en la clave";
+        mensaje.className = "msg-error";
+    }
 
-        usados.add(num);
-        boton.disabled = true;
-        boton.classList.add("used");
+    comprobarEstado();
+}
 
-        intentos--;
-        displayIntentos.textContent = intentos;
+// ===== EVENTOS BOTONES =====
+function clickNumero() {
+    manejarClick(this);
+}
 
-        let acierto = false;
-
-        clave.forEach((valor, i) => {
-            if (valor === num) {
-                casillas[i].textContent = num;
-                casillas[i].classList.add("correct", "magic");
-
-                setTimeout(() => {
-                    casillas[i].classList.remove("magic");
-                }, 400);
-
-                acierto = true;
-            }
-        });
-
-        if (acierto) {
-            sonidoAcierto.play();
-            mensaje.textContent = `Has acertado el número ${num}. Sigue así`;
-            mensaje.className = "msg-ok";
-        } else {
-            sonidoFallo.play();
-            mensaje.textContent = `El número ${num} no está en la clave`;
-            mensaje.className = "msg-error";
-        }
-
-        comprobarEstado();
-    });
-});
+var j;
+for (j = 0; j < botones.length; j++) {
+    botones[j].addEventListener("click", clickNumero);
+}
 
 // ===== ESTADO =====
 function comprobarEstado() {
 
-    let ganado = [...casillas].every(c => c.textContent !== "*");
+    var ganado = true;
+    var i;
+
+    for (i = 0; i < casillas.length; i++) {
+        if (casillas[i].textContent === "*") {
+            ganado = false;
+            break;
+        }
+    }
 
     if (ganado) {
         crono.stop();
         sonidoVictoria.play();
 
-        botones.forEach(b => {
-            b.disabled = true;
-            b.classList.remove("used");
-        });
+        for (i = 0; i < botones.length; i++) {
+            botones[i].disabled = true;
+            botones[i].classList.remove("used");
+        }
 
         bloquearControles();
 
-        mensaje.textContent = `¡Clave descubierta! Tiempo: ${displayTiempo.textContent} - Intentos consumidos: ${7 - intentos} - Intentos restantes: ${intentos}`;
+        mensaje.textContent = "¡Clave descubierta! Tiempo: " + displayTiempo.textContent +
+            " - Intentos consumidos: " + (7 - intentos) +
+            " - Intentos restantes: " + intentos;
+
         mensaje.className = "msg-ok";
 
         juegoActivo = false;
@@ -176,21 +218,23 @@ function comprobarEstado() {
     if (intentos === 0) {
         crono.stop();
 
-        casillas.forEach(c => {
-            c.textContent = "*";
-            c.classList.add("explosion");
-        });
+        for (i = 0; i < casillas.length; i++) {
+            casillas[i].textContent = "*";
+            casillas[i].classList.add("explosion");
+        }
 
-        botones.forEach(b => {
-            b.disabled = true;
-            b.classList.remove("used");
-        });
+        for (i = 0; i < botones.length; i++) {
+            botones[i].disabled = true;
+            botones[i].classList.remove("used");
+        }
 
         sonidoDerrota.play();
 
         bloquearControles();
 
-        mensaje.textContent = `💥 BOOM. Has agotado los intentos. La clave correcta era ${clave.join("")}. Pulsa Reset para jugar otra vez.`;
+        mensaje.textContent = "💥 BOOM. Has agotado los intentos. La clave correcta era " +
+            clave.join("") + ". Pulsa Reset para jugar otra vez.";
+
         mensaje.className = "msg-error";
 
         juegoActivo = false;
@@ -198,7 +242,7 @@ function comprobarEstado() {
 }
 
 // ===== CONTROLES =====
-document.getElementById("start").onclick = () => {
+btnStart.onclick = function () {
     crono.start();
     btnStop.classList.remove("stop-activo");
 
@@ -206,7 +250,7 @@ document.getElementById("start").onclick = () => {
     mensaje.className = "msg-info";
 };
 
-btnStop.onclick = () => {
+btnStop.onclick = function () {
     crono.stop();
     btnStop.classList.add("stop-activo");
 
@@ -214,14 +258,12 @@ btnStop.onclick = () => {
     mensaje.className = "msg-stop";
 };
 
-document.getElementById("reset").onclick = () => {
+document.getElementById("reset").onclick = function () {
     crono.reset();
     nuevaPartida();
 
-        // Reactivar botones
     btnStart.disabled = false;
     btnStop.disabled = false;
-
 };
 
 // ===== INIT =====
