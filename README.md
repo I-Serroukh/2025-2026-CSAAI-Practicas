@@ -5,6 +5,6 @@ URJC Alumna
 
 Links:
 
-CV https://i-serroukh.github.io/2025-2026-CSAAI-Practicas/P1/
+- CV https://i-serroukh.github.io/2025-2026-CSAAI-Practicas/P1/
 
-BOOM https://i-serroukh.github.io/2025-2026-CSAAI-Practicas/P2/
+- BOOM https://i-serroukh.github.io/2025-2026-CSAAI-Practicas/P2/
