@@ -1,0 +1,167 @@
+body {
+  background: radial-gradient(circle, #2b0000, #000000);
+  color: #ff4d6d;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 60px;
+  color: #ff4d6d;
+  text-shadow: 
+    0 0 8px #ff0033,
+    0 0 15px #ff0033;
+}
+
+h1 {
+  animation: boomGlow 3s infinite alternate ease-in-out;
+}
+
+@keyframes boomGlow {
+  from { 
+    text-shadow: 0 0 4px #ff0033;
+  }
+  to { 
+    text-shadow: 0 0 10px #ff0033;
+  }
+}
+
+
+.container {
+  border: 2px solid #ff0033;
+  box-shadow: 0 0 20px #ff0033;
+  padding: 20px;
+  margin: 20px auto;
+  width: 420px;
+}
+
+.secret {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.secret div {
+  border: 2px solid #ff0033;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 24px;
+  box-shadow: 0 0 10px #ff0033;
+}
+
+.correct {
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 10px #ff0033; }
+  to { box-shadow: 0 0 30px #ff0033; }
+}
+
+button {
+  background-color: #330000;
+  color: #ff4d6d;
+  border: 1px solid #ff0033;
+  padding: 15px;
+  margin: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff0033;
+}
+
+button:hover {
+  background-color: #ff0033;
+  color: black;
+}
+
+button:disabled {
+  background-color: #111;
+  color: #555;
+  box-shadow: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.controls {
+  margin-top: 10px;
+}
+
+/* MENSAJES */
+#mensaje {
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+.msg-info { color: #ff4d6d; }
+.msg-ok { color: #00ffcc; }
+.msg-error { color: #ff0033; }
+.msg-stop { color: white; }
+
+/* EFECTOS */
+.magic {
+  animation: magicPulse 0.4s ease;
+}
+
+@keyframes magicPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); box-shadow: 0 0 30px #ff0033; }
+  100% { transform: scale(1); }
+}
+
+.explosion {
+  animation: explode 0.6s ease;
+}
+
+@keyframes explode {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5) rotate(10deg); }
+  100% { transform: scale(1); }
+}
+
+.used {
+  opacity: 0.4;
+  transform: scale(0.9);
+}
+
+.stop-activo {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* ===== RESPONSIVE MÓVIL ===== */
+@media (max-width: 500px) {
+
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .secret div {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #mensaje {
+    font-size: 13px;
+  }
+}
