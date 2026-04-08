@@ -1,0 +1,100 @@
+body{
+	margin: 0;
+	background: radial-gradient(circle at top, #1c3b6b, #0a1a3a);
+	color: white;
+	font-family: 'Orbitron', sans-serif;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.container{
+	text-align: center;
+}
+
+h1{
+	font-size: 40px;
+	text-shadow: 0 0 20px #00f7ff;
+}
+
+.subtitle{
+	font-size: 16px;
+	opacity: 0.85;
+	margin-bottom: 10px;
+}
+
+canvas{
+	border: 2px solid #00f7ff;
+	box-shadow:
+		0 0 20px #00f7ff,
+		0 0 40px rgba(0,247,255,0.3);
+
+	background: linear-gradient(#020d1f, #041a2e);
+
+	display: block;
+	margin: auto;
+}
+
+.hud{
+	display: flex;
+	justify-content: space-between;
+	width: 800px;
+	margin: auto;
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+/* Barra energía */
+
+#energyBar{
+	width: 150px;
+	height: 15px;
+	border: 1px solid white;
+	background: rgba(255,255,255,0.1);
+}
+
+#energyFill{
+	height: 100%;
+	background: linear-gradient(90deg,#00f7ff,#00aaff);
+	width: 100%;
+	transition: 0.2s;
+}
+
+/* Overlay */
+
+#overlay{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.6);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	z-index: 999;
+}
+
+#gameMessage{
+	font-size: 80px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.victory{
+	color: #00f7ff;
+	text-shadow: 0 0 30px #00f7ff;
+}
+
+.gameover{
+	color: #ff003c;
+	text-shadow: 0 0 30px #ff003c;
+}
+
+.hidden{
+	display: none;
+}

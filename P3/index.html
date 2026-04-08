@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Invasión Alienígena</title>
+
+	<link rel="stylesheet" href="styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h1>Invasión Alienígena</h1>
+		<h2 class="subtitle">Episodio 18: Defensa de Canva Centauri</h2>
+
+		<div class="hud">
+			<div id="score">Puntuación: 0</div>
+			<div id="lives">❤️❤️❤️</div>
+			<div id="energyBar">
+				<div id="energyFill"></div>
+			</div>
+		</div>
+
+		<canvas id="gameCanvas"></canvas>
+
+	</div>
+
+	<div id="overlay" class="hidden">
+		<div id="gameMessage"></div>
+	</div>
+
+	<script src="game.js"></script>
+
+</body>
+</html>
