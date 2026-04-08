@@ -1,100 +1,152 @@
 body{
-	margin: 0;
-	background: radial-gradient(circle at top, #1c3b6b, #0a1a3a);
-	color: white;
-	font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    background: radial-gradient(circle at top, #1c3b6b, #0a1a3a);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    /* ( brillo base durante gameplay */
+    filter: brightness(1.15) saturate(1.2);
 }
 
+/* < OSCURECER SOLO AL FINAL */
+body.game-end{
+    filter: brightness(0.6);
+    transition: 0.5s;
+}
+
+/* canvas más apagado solo al final */
+body.game-end canvas{
+    filter: brightness(0.4);
+}
+
+/* CONTENEDOR */
 .container{
-	text-align: center;
+    text-align: center;
 }
 
+/* TÍTULO MÁS BRILLANTE */
 h1{
-	font-size: 40px;
-	text-shadow: 0 0 20px #00f7ff;
+    font-size: 40px;
+    text-shadow:
+        0 0 10px #00f7ff,
+        0 0 20px #00f7ff,
+        0 0 40px #00f7ff;
 }
 
+/* SUBTÍTULO */
 .subtitle{
-	font-size: 16px;
-	opacity: 0.85;
-	margin-bottom: 10px;
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 10px;
 }
 
+/* CANVAS CON MÁS GLOW */
 canvas{
-	border: 2px solid #00f7ff;
-	box-shadow:
-		0 0 20px #00f7ff,
-		0 0 40px rgba(0,247,255,0.3);
+    border: 2px solid #00f7ff;
 
-	background: linear-gradient(#020d1f, #041a2e);
+    box-shadow:
+        0 0 20px #00f7ff,
+        0 0 40px #00f7ff,
+        0 0 80px rgba(0,247,255,0.4);
 
-	display: block;
-	margin: auto;
+    background: linear-gradient(#020d1f, #041a2e);
+
+    display: block;
+    margin: auto;
+
+    position: relative;
+    z-index: 1;
 }
 
+/* HUD */
 .hud{
-	display: flex;
-	justify-content: space-between;
-	width: 800px;
-	margin: auto;
-	margin-bottom: 10px;
-	font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    margin: auto;
+    margin-bottom: 10px;
+    font-size: 18px;
+
+    text-shadow: 0 0 10px rgba(255,255,255,0.4);
 }
 
-/* Barra energía */
-
+/* BARRA ENERGÍA */
 #energyBar{
-	width: 150px;
-	height: 15px;
-	border: 1px solid white;
-	background: rgba(255,255,255,0.1);
+    width: 150px;
+    height: 15px;
+    border: 1px solid white;
+    background: rgba(255,255,255,0.1);
+
+    box-shadow: 0 0 10px rgba(0,247,255,0.4);
 }
 
 #energyFill{
-	height: 100%;
-	background: linear-gradient(90deg,#00f7ff,#00aaff);
-	width: 100%;
-	transition: 0.2s;
+    height: 100%;
+    background: linear-gradient(90deg,#00f7ff,#00aaff);
+    width: 100%;
+    transition: 0.2s;
+
+    box-shadow: 0 0 10px #00f7ff;
 }
 
-/* Overlay */
-
+/* OVERLAY MEJORADO =% */
 #overlay{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    background: rgba(0,0,0,0.85);
 
-	z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999; /* =% clave */
 }
 
+/* TEXTO CENTRAL */
 #gameMessage{
-	font-size: 80px;
-	font-weight: bold;
-	text-align: center;
+    font-size: 80px;
+    font-weight: bold;
+    text-align: center;
+
+    animation: pulse 1.5s infinite alternate;
 }
 
+/* VICTORIA */
 .victory{
-	color: #00f7ff;
-	text-shadow: 0 0 30px #00f7ff;
+    color: #00f7ff;
+    text-shadow:
+        0 0 8px #00f7ff,
+        0 0 16px rgba(0,247,255,0.5);
 }
 
+/* GAME OVER */
 .gameover{
-	color: #ff003c;
-	text-shadow: 0 0 30px #ff003c;
+    color: #ff003c;
+    text-shadow:
+        0 0 8px #ff003c,
+        0 0 16px rgba(255,0,60,0.5);
 }
 
+/* ANIMACIÓN SUAVE */
+@keyframes pulse{
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.05);
+    }
+}
+
+/* OCULTO */
 .hidden{
-	display: none;
+    display: none !important;
 }
