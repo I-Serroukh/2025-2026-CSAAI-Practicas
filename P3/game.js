@@ -22,6 +22,7 @@ explosionImg.src = "img/explosion.png";
 // SONIDOS
 const shootSound = new Audio("sounds/disparo.mp3");
 const explosionSound = new Audio("sounds/explosion.mp3");
+const hitSound = new Audio("sounds/hit.mp3");
 const victorySound = new Audio("sounds/victoria.mp3");
 const gameOverSound = new Audio("sounds/gameover.mp3");
 
@@ -250,6 +251,9 @@ function collisions(){
 
 			enemyBullets.splice(i, 1);
 			player.lives--;
+
+            hitSound.currentTime = 0;
+            hitSound.play();
 
 		}
 	}
