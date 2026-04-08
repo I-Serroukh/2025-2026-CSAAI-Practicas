@@ -13,7 +13,7 @@ body{
     filter: brightness(1.15) saturate(1.2);
 }
 
-/* < OSCURECER SOLO AL FINAL */
+/* OSCURECER SOLO AL FINAL */
 body.game-end{
     filter: brightness(0.6);
     transition: 0.5s;
@@ -108,7 +108,7 @@ canvas{
     justify-content: center;
     align-items: center;
 
-    z-index: 9999; /* =% clave */
+    z-index: 9999; /* clave */
 }
 
 /* TEXTO CENTRAL */
