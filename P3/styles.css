@@ -19,11 +19,6 @@ body.game-end{
     transition: 0.5s;
 }
 
-/* canvas más apagado solo al final */
-body.game-end canvas{
-    filter: brightness(0.4);
-}
-
 /* CONTENEDOR */
 .container{
     text-align: center;
