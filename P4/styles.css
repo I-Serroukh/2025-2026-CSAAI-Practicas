@@ -145,14 +145,26 @@ button:hover {
   font-size: 45px;
 }
 
-.cell span {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+.cell {
+  height: 140px;
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: 0.2s;
 }
 
+.cell span{ 
+   position:absolute; 
+   bottom:0; 
+   width:100%; 
+   background:rgba(0,0,0,0.6); 
+   color:white; 
+   border-radius:0 0 25px 25px; 
+   font-weight:800; 
+}
 /* ACTIVE STATE */
 .active {
   border: 4px solid #ff2e7a;
