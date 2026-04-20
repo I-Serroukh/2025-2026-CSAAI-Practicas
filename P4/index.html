@@ -1,115 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beat The Word</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beat The Word</title>
 
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="app">
 
-    <header class="topbar">
+<header class="topbar">
 
-        <div class="title">
-            <h1>Beat The Word</h1>
-            <p class="subtitle">
-                Observa la secuencia de 8 imágenes que se iluminan en orden
-            </p>
-        </div>
+<div class="title">
+<h1>Beat The Word</h1>
+<p class="subtitle">
+Observa la secuencia de 8 imágenes que se iluminan en orden
+</p>
+</div>
 
-        <div class="stats">
+<div class="stats">
 
-            <div class="box">
-                <span class="label">Nivel</span>
-                <span id="level" class="value">1/5</span>
-            </div>
+<div class="box">
+<span class="label">Nivel</span>
+<span id="level" class="value">1/5</span>
+</div>
 
-            <div class="box">
-                <span class="label">Tiempo</span>
-                <span id="time" class="value">0s</span>
-            </div>
+<div class="box">
+<span class="label">Tiempo</span>
+<span id="time" class="value">0s</span>
+</div>
 
-            <div class="box">
-                <span class="label">Estado</span>
-                <span id="status" class="value">Esperando</span>
-            </div>
+<div class="box">
+<span class="label">Estado</span>
+<span id="status" class="value">En espera</span>
+</div>
 
-        </div>
+</div>
 
-    </header>
+</header>
 
-    <div class="main">
+<div class="main">
 
-        <aside class="sidebar">
+<aside class="sidebar">
 
-            <div class="card">
-                <h3>Cómo funciona</h3>
-                <p>
-                    El juego recorre 8 tarjetas siguiendo el ritmo.
-                    Cada nivel aumenta la velocidad.
-                </p>
-            </div>
+<div class="card">
+<h3>Cómo funciona</h3>
+<p>
+El juego recorre 8 imágenes en orden.
+Cada nivel aumenta la velocidad y dificultad.
+</p>
+</div>
 
-            <div class="card">
+<div class="card">
 
-                <h3>Configuración</h3>
+<h3>Configuración</h3>
 
-                <label>Secuencia</label>
-                <select id="pairSelect">
-                    <option value="casa">Casa / Cama</option>
-                    <option value="animales">Pato / Gato</option>
-                    <option value="random1">Queso / Beso</option>
-                    <option value="random2">Luna / Cuna</option>
-                </select>
+<label>Secuencia</label>
+<select id="pairSelect">
+<option value="casa">Casa / Cama</option>
+<option value="animales">Pato / Gato</option>
+<option value="random1">Queso / Beso</option>
+<option value="random2">Luna / Cuna</option>
+</select>
 
-                <label>Nivel inicial</label>
-                <select id="levelSelect">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+<label>Nivel inicial</label>
+<select id="levelSelect">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
 
-                <label>
-                    <input type="checkbox" id="toggleLabels" checked>
-                    Mostrar subtítulos
-                </label>
+<label>
+<input type="checkbox" id="toggleLabels" checked>
+Mostrar subtítulos
+</label>
 
-                <button id="volumeToggle">Activar música</button>
+<button id="volumeToggle">Activar música</button>
 
-                <input type="range"
-                       id="volumeSlider"
-                       min="0"
-                       max="1"
-                       step="0.01"
-                       value="0.5"
-                       style="display:none">
+<input 
+type="range"
+id="volumeSlider"
+min="0"
+max="1"
+step="0.01"
+value="0.5"
+style="display:none"
+>
 
-            </div>
+</div>
 
-            <button id="startBtn" class="primary">Comenzar</button>
-            <button id="stopBtn">Detener</button>
+<button id="startBtn" class="primary">Comenzar</button>
+<button id="stopBtn">Detener</button>
 
-        </aside>
+</aside>
 
-        <section class="game">
+<section class="game">
 
-            <div class="center-info">
-                <h2 id="round">1/5</h2>
-                <p id="wordDisplay">Pulsa comenzar</p>
-            </div>
+<div class="center-info">
+<h2 id="round">1/5</h2>
+<p id="wordDisplay">Pulsa comenzar</p>
+</div>
 
-            <div class="grid" id="grid"></div>
+<div class="grid" id="grid"></div>
 
-        </section>
-
-    </div>
+</section>
 
 </div>
 
