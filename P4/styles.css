@@ -1,0 +1,98 @@
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#f8c8dc,#f4a7c0);
+}
+
+.app{
+    text-align:center;
+}
+
+.title h1{
+    font-size:40px;
+    color:#ff2e7a;
+}
+
+.subtitle{
+    color:black;
+}
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.box{
+    background:white;
+    padding:10px 20px;
+    border-radius:999px;
+}
+
+.label{
+    color:#ff2e7a;
+    font-weight:600;
+}
+
+.value{
+    color:#ff2e7a;
+    font-weight:700;
+    font-size:20px;
+}
+
+#wordDisplay{
+    color:white;
+    font-size:40px;
+    font-weight:800;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,150px);
+    gap:20px;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.cell{
+    height:160px;
+    background:white;
+    border-radius:25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    transition:0.2s;
+}
+
+.emoji{
+    font-size:50px;
+}
+
+.cell span{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:rgba(0,0,0,0.6);
+    color:white;
+    border-radius:0 0 25px 25px;
+}
+
+.active{
+    border:4px solid #ff2e7a;
+    transform:scale(1.1);
+    box-shadow:0 0 20px #ff2e7a;
+}
+
+button{
+    padding:12px;
+    border-radius:25px;
+    border:none;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.primary{
+    background:#ff2e7a;
+    color:white;
+}
