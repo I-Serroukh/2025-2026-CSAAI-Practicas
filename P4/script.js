@@ -160,24 +160,28 @@ function startGame() {
 
   function nextLevel() {
 
-    if (!gameRunning || level > 5) {
+    if (!gameRunning) return;
+
+    if (level > 5) {
       endGame();
       return;
     }
 
     currentLevel = level;
-
     levelSpan.textContent = level + "/5";
     roundSpan.textContent = level + "/5";
 
     wordDisplay.textContent = "Preparado...";
 
     setTimeout(function() {
+
       if (!gameRunning) return;
 
       runLevel(level, function() {
-        level++;
-        nextLevel();
+
+        level++; 
+        nextLevel(); 
+
       });
 
     }, 1000);
