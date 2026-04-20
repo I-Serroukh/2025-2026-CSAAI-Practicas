@@ -1,123 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beat The Word</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beat The Word</title>
 
-<link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  </head>
 
-<body>
+  <body>
+    <div class="app">
 
-<div class="app">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="title">
+          <h1>Beat The Word</h1>
+          <p class="subtitle">
+            Observa la secuencia de imágenes que se iluminan en orden
+          </p>
+        </div>
 
-<header class="topbar">
+        <div class="stats">
+          <div class="box">
+            <span class="label">Nivel</span>
+            <span id="level" class="value">1/5</span>
+          </div>
 
-<div class="title">
-<h1>Beat The Word</h1>
-<p class="subtitle">
-Observa la secuencia de 8 imágenes que se iluminan en orden
-</p>
-</div>
+          <div class="box">
+            <span class="label">Tiempo</span>
+            <span id="time" class="value">0s</span>
+          </div>
 
-<div class="stats">
+          <div class="box">
+            <span class="label">Estado</span>
+            <span id="status" class="value">En espera</span>
+          </div>
+        </div>
+      </header>
 
-<div class="box">
-<span class="label">Nivel</span>
-<span id="level" class="value">1/5</span>
-</div>
+      <!-- MAIN -->
+      <div class="main">
 
-<div class="box">
-<span class="label">Tiempo</span>
-<span id="time" class="value">0s</span>
-</div>
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
 
-<div class="box">
-<span class="label">Estado</span>
-<span id="status" class="value">En espera</span>
-</div>
+          <div class="card">
+            <h3>Cómo funciona</h3>
+            <p>
+              El juego recorre 8 imágenes en orden.
+              Cada nivel aumenta la velocidad y dificultad.
+            </p>
+          </div>
 
-</div>
+          <div class="card">
+            <h3>Configuración</h3>
 
-</header>
+            <label>Secuencia</label>
+            <select id="pairSelect">
+              <option value="casa">Casa / Cama</option>
+              <option value="animales">Pato / Gato</option>
+              <option value="random1">Queso / Beso</option>
+              <option value="random2">Luna / Cuna</option>
+            </select>
 
-<div class="main">
+            <label>Nivel inicial</label>
+            <select id="levelSelect">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
 
-<aside class="sidebar">
+            <label>
+              <input type="checkbox" id="toggleLabels" checked>
+              Mostrar subtítulos
+            </label>
 
-<div class="card">
-<h3>Cómo funciona</h3>
-<p>
-El juego recorre 8 imágenes en orden.
-Cada nivel aumenta la velocidad y dificultad.
-</p>
-</div>
+            <button id="volumeToggle">Activar música</button>
 
-<div class="card">
+            <input
+              type="range"
+              id="volumeSlider"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.5"
+              style="display:none"
+            >
+          </div>
 
-<h3>Configuración</h3>
+          <button id="startBtn" class="primary">Comenzar</button>
+          <button id="stopBtn">Detener</button>
 
-<label>Secuencia</label>
-<select id="pairSelect">
-<option value="casa">Casa / Cama</option>
-<option value="animales">Pato / Gato</option>
-<option value="random1">Queso / Beso</option>
-<option value="random2">Luna / Cuna</option>
-</select>
+        </aside>
 
-<label>Nivel inicial</label>
-<select id="levelSelect">
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-</select>
+        <!-- GAME -->
+        <section class="game">
+          <div class="center-info">
+            <h2 id="round">1/5</h2>
+            <p id="wordDisplay">Pulsa comenzar</p>
+          </div>
 
-<label>
-<input type="checkbox" id="toggleLabels" checked>
-Mostrar subtítulos
-</label>
+          <div class="grid" id="grid"></div>
+        </section>
 
-<button id="volumeToggle">Activar música</button>
+      </div>
 
-<input 
-type="range"
-id="volumeSlider"
-min="0"
-max="1"
-step="0.01"
-value="0.5"
-style="display:none"
->
+    </div>
 
-</div>
+    <!-- AUDIO -->
+    <audio id="music" src="music.mp3" loop></audio>
+    <audio id="beatSound" src="beat.mp3"></audio>
 
-<button id="startBtn" class="primary">Comenzar</button>
-<button id="stopBtn">Detener</button>
-
-</aside>
-
-<section class="game">
-
-<div class="center-info">
-<h2 id="round">1/5</h2>
-<p id="wordDisplay">Pulsa comenzar</p>
-</div>
-
-<div class="grid" id="grid"></div>
-
-</section>
-
-</div>
-
-<audio id="music" src="music.mp3" loop></audio>
-<audio id="beatSound" src="beat.mp3"></audio>
-
-<script src="script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
