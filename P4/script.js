@@ -1,84 +1,87 @@
 // ELEMENTOS
-const grid = document.getElementById("grid");
-const startBtn = document.getElementById("startBtn");
-const stopBtn = document.getElementById("stopBtn");
+var grid = document.getElementById("grid");
+var startBtn = document.getElementById("startBtn");
+var stopBtn = document.getElementById("stopBtn");
 
-const pairSelect = document.getElementById("pairSelect");
-const levelSelect = document.getElementById("levelSelect");
+var pairSelect = document.getElementById("pairSelect");
+var levelSelect = document.getElementById("levelSelect");
 
-const toggleLabels = document.getElementById("toggleLabels");
+var toggleLabels = document.getElementById("toggleLabels");
 
-const volumeToggle = document.getElementById("volumeToggle");
-const volumeSlider = document.getElementById("volumeSlider");
+var volumeToggle = document.getElementById("volumeToggle");
+var volumeSlider = document.getElementById("volumeSlider");
 
-const beatSound = document.getElementById("beatSound");
-const music = document.getElementById("music");
+var beatSound = document.getElementById("beatSound");
+var music = document.getElementById("music");
 
-const levelSpan = document.getElementById("level");
-const timeSpan = document.getElementById("time");
-const statusSpan = document.getElementById("status");
-const roundSpan = document.getElementById("round");
-const wordDisplay = document.getElementById("wordDisplay");
+var levelSpan = document.getElementById("level");
+var timeSpan = document.getElementById("time");
+var statusSpan = document.getElementById("status");
+var roundSpan = document.getElementById("round");
+var wordDisplay = document.getElementById("wordDisplay");
 
 // ESTADO
-let cells = [];
-let gameRunning = false;
-let timer = 0;
-let interval;
-let musicActive = false;
-let currentLevel = 1;
+var cells = [];
+var gameRunning = false;
+var timer = 0;
+var interval = null;
+var musicActive = false;
+var currentLevel = 1;
 
 // DATOS
-const pairs = {
-  casa: { words: ["CASA", "CAMA"], icons: ["🏠", "🛏️"] },
-  animales: { words: ["PATO", "GATO"], icons: ["🦆", "🐱"] },
-  random1: { words: ["QUESO", "BESO"], icons: ["🧀", "💋"] },
-  random2: { words: ["LUNA", "CUNA"], icons: ["🌙", "🛏️"] }
+var pairs = {
+  casa: { words: ["CASA","CAMA"], icons: ["🏠","🛏️"] },
+  animales: { words: ["PATO","GATO"], icons: ["🦆","🐱"] },
+  random1: { words: ["QUESO","BESO"], icons: ["🧀","💋"] },
+  random2: { words: ["LUNA","CUNA"], icons: ["🌙","🛏️"] }
 };
 
 // CREAR GRID
-for (let i = 0; i < 8; i++) {
-  const div = document.createElement("div");
-  div.classList.add("cell");
+for (var i = 0; i < 8; i++) {
+  var div = document.createElement("div");
+  div.className = "cell";
   grid.appendChild(div);
   cells.push(div);
 }
 
 // UTILIDADES
-function shuffle(a) {
-  return [...a].sort(() => Math.random() - 0.5);
+function shuffle(array) {
+  var copy = array.slice();
+  copy.sort(function() {
+    return Math.random() - 0.5;
+  });
+  return copy;
 }
 
 function getPattern(level) {
-  switch (level) {
-    case 1: return [0,0,0,0,1,1,1,1];
-    case 2: return [0,0,1,1,0,0,1,1];
-    case 3: return [0,1,0,1,0,1,0,1];
-    case 4: return shuffle([0,0,0,0,1,1,1,1]);
-    case 5: return shuffle([0,0,0,0,1,1,1,1]);
-  }
+  if (level === 1) return [0,0,0,0,1,1,1,1];
+  if (level === 2) return [0,0,1,1,0,0,1,1];
+  if (level === 3) return [0,1,0,1,0,1,0,1];
+  if (level === 4) return shuffle([0,0,0,0,1,1,1,1]);
+  if (level === 5) return shuffle([0,0,0,0,1,1,1,1]);
 }
 
 // GRID
 function updateGrid(level) {
-  const p = pairs[pairSelect.value];
-  const pattern = getPattern(level);
+  var p = pairs[pairSelect.value];
+  var pattern = getPattern(level);
 
-  cells.forEach((c, i) => {
-    const idx = pattern[i];
+  for (var i = 0; i < cells.length; i++) {
+    var c = cells[i];
+    var idx = pattern[i];
 
-    c.innerHTML = `
-      <div class="emoji">${p.icons[idx]}</div>
-      <span style="display:${toggleLabels.checked ? 'block' : 'none'}">
-        ${p.words[idx]}
-      </span>
-    `;
+    c.innerHTML =
+      '<div class="emoji">' + p.icons[idx] + '</div>' +
+      '<span style="display:' + (toggleLabels.checked ? "block" : "none") + '">' +
+      p.words[idx] +
+      '</span>';
 
     c.dataset.word = p.words[idx];
-  });
+  }
 }
 
-toggleLabels.addEventListener("change", () => {
+// EVENTO LABELS
+toggleLabels.addEventListener("change", function() {
   updateGrid(currentLevel);
 });
 
@@ -91,31 +94,44 @@ function playBeat(level) {
   beatSound.play();
 }
 
-// NIVEL
-async function runLevel(level) {
+// NIVEL (SIN async)
+function runLevel(level, callback) {
+
   updateGrid(level);
 
-  const speed = Math.max(300, 1000 - level * 150);
+  var speed = Math.max(300, 1000 - level * 150);
+  var i = 0;
 
-  for (let i = 0; i < 8; i++) {
+  function step() {
 
-    if (!gameRunning) return;
+    if (!gameRunning) {
+      if (callback) callback();
+      return;
+    }
 
-    cells.forEach(c => c.classList.remove("active"));
+    for (var j = 0; j < cells.length; j++) {
+      cells[j].classList.remove("active");
+    }
+
     cells[i].classList.add("active");
-
     wordDisplay.textContent = cells[i].dataset.word;
 
     playBeat(level);
 
-    await new Promise(r => setTimeout(r, speed));
+    i++;
 
-    if (!gameRunning) return;
+    if (i < 8) {
+      setTimeout(step, speed);
+    } else {
+      if (callback) callback();
+    }
   }
+
+  step();
 }
 
 // START
-async function startGame() {
+function startGame() {
 
   if (gameRunning) return;
 
@@ -129,21 +145,25 @@ async function startGame() {
   if (musicActive) {
     music.volume = volumeSlider.value;
     music.currentTime = 0;
-    music.play().catch(() => {});
+    music.play();
   }
 
   timer = 0;
 
-  interval = setInterval(() => {
+  interval = setInterval(function() {
     timer++;
     timeSpan.textContent = timer + "s";
   }, 1000);
 
-  const startLevel = parseInt(levelSelect.value);
+  var startLevel = parseInt(levelSelect.value);
+  var level = startLevel;
 
-  for (let level = startLevel; level <= 5; level++) {
+  function nextLevel() {
 
-    if (!gameRunning) break;
+    if (!gameRunning || level > 5) {
+      endGame();
+      return;
+    }
 
     currentLevel = level;
 
@@ -152,14 +172,18 @@ async function startGame() {
 
     wordDisplay.textContent = "Preparado...";
 
-    await new Promise(r => setTimeout(r, 1000));
+    setTimeout(function() {
+      if (!gameRunning) return;
 
-    if (!gameRunning) break;
+      runLevel(level, function() {
+        level++;
+        nextLevel();
+      });
 
-    await runLevel(level);
+    }, 1000);
   }
 
-  endGame();
+  nextLevel();
 }
 
 // STOP
@@ -172,7 +196,9 @@ function stopGame() {
   music.pause();
   music.currentTime = 0;
 
-  cells.forEach(c => c.classList.remove("active"));
+  for (var i = 0; i < cells.length; i++) {
+    cells[i].classList.remove("active");
+  }
 
   statusSpan.textContent = "Detenido";
 
@@ -191,7 +217,7 @@ function endGame() {
 }
 
 // CONTROLES
-volumeToggle.onclick = () => {
+volumeToggle.onclick = function() {
 
   musicActive = !musicActive;
 
@@ -205,7 +231,7 @@ volumeToggle.onclick = () => {
   }
 };
 
-volumeSlider.oninput = () => {
+volumeSlider.oninput = function() {
   music.volume = volumeSlider.value;
 };
 
