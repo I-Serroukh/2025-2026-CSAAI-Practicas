@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bot League</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -19,23 +19,24 @@
 
     <div class="scoreboard">
 
-    <span id="playerScore">0</span>
-    <span>-</span>
-    <span id="botScore">0</span>
+      <span id="playerScore">0</span>
+      <span>-</span>
+      <span id="botScore">0</span>
 
-    <div class="score-extra">
+      <div class="score-extra">
 
-    <p id="modeLabel">A 3 goles</p>
+        <p id="modeLabel">A 3 goles</p>
 
-    <p id="difficultyLabel">
-        Dificultad: Normal
-    </p>
+        <p id="difficultyLabel">
+          Dificultad: Normal
+        </p>
 
-    <div id="timer">03:00</div>
+        <div id="timer">03:00</div>
+
+      </div>
 
     </div>
 
-    </div>
     <div class="field-container">
 
       <canvas id="gameCanvas" width="1000" height="600"></canvas>
@@ -49,17 +50,17 @@
 
         <div class="difficulty-buttons">
 
-        <button data-difficulty="easy">
+          <button data-difficulty="easy">
             Fácil
-        </button>
+          </button>
 
-        <button data-difficulty="normal">
+          <button data-difficulty="normal">
             Normal
-        </button>
+          </button>
 
-        <button data-difficulty="hard">
+          <button data-difficulty="hard">
             Difícil
-        </button>
+          </button>
 
         </div>
 
@@ -81,7 +82,7 @@
 
       <!-- FIN -->
       <div id="gameOver" class="overlay hidden">
-        <h2 id="finalText"></h2>
+        <h2 id="finalText">Resultado final</h2>
 
         <button id="restartBtn">Reiniciar</button>
         <button id="menuBtn">Volver al menú</button>
