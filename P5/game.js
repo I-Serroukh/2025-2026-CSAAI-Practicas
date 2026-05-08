@@ -30,6 +30,10 @@ const kickSound = new Audio("assets/kick.mp3");
 const goalSound = new Audio("assets/goal.mp3");
 const whistleSound = new Audio("assets/whistle.mp3");
 
+kickSound.volume = 0.4;
+goalSound.volume = 0.5;
+whistleSound.volume = 0.6;
+
 // =======================
 // ESTADO DEL JUEGO
 // =======================
@@ -258,15 +262,18 @@ function startCountdown() {
 
       clearInterval(interval);
 
+      whistleSound.pause();
+      whistleSound.currentTime = 0;
+  
+      whistleSound.play().catch(() => {});
+
       countdownEl.classList.add("hidden");
 
       countdownActive = false;
       gameRunning = true;
-
-      whistleSound.play();
-
+  
       if (!timerInterval) {
-        startTimer();
+          startTimer();
       }
     }
 
@@ -530,8 +537,10 @@ function shootBall() {
 
   if (dist < 70) {
 
+    kickSound.pause();
     kickSound.currentTime = 0;
-    kickSound.play();
+
+    kickSound.play().catch(() => {});
 
     ball.vx = Math.cos(player.angle) * 10;
     ball.vy = Math.sin(player.angle) * 10;
@@ -649,8 +658,10 @@ function scored(text) {
 
   gameRunning = false;
 
+  goalSound.pause();
   goalSound.currentTime = 0;
-  goalSound.play();
+
+  goalSound.play().catch(() => {});
 
   updateScore();
 
