@@ -1,0 +1,100 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bot League</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="game-wrapper">
+
+    <header class="top-info">
+      <h1>Bot League</h1>
+      <p>Versión 0 · Movimiento, dirección y chut</p>
+    </header>
+
+    <div class="scoreboard">
+
+    <span id="playerScore">0</span>
+    <span>-</span>
+    <span id="botScore">0</span>
+
+    <div class="score-extra">
+
+    <p id="modeLabel">A 3 goles</p>
+
+    <p id="difficultyLabel">
+        Dificultad: Normal
+    </p>
+
+    <div id="timer">03:00</div>
+
+    </div>
+
+    </div>
+    <div class="field-container">
+
+      <canvas id="gameCanvas" width="1000" height="600"></canvas>
+
+      <!-- MENÚ -->
+      <div id="menuScreen" class="overlay active">
+        <h2>Bot League</h2>
+        <p>Elige modo de juego</p>
+
+        <h3>Dificultad</h3>
+
+        <div class="difficulty-buttons">
+
+        <button data-difficulty="easy">
+            Fácil
+        </button>
+
+        <button data-difficulty="normal">
+            Normal
+        </button>
+
+        <button data-difficulty="hard">
+            Difícil
+        </button>
+
+        </div>
+
+        <button data-mode="3goals">
+          Pulsa 1: Partido a 3 goles
+        </button>
+
+        <button data-mode="golden">
+          Pulsa 2: Gol de oro
+        </button>
+
+      </div>
+
+      <!-- CUENTA ATRÁS -->
+      <div id="countdown" class="overlay hidden countdown"></div>
+
+      <!-- MENSAJES -->
+      <div id="message" class="message hidden"></div>
+
+      <!-- FIN -->
+      <div id="gameOver" class="overlay hidden">
+        <h2 id="finalText"></h2>
+
+        <button id="restartBtn">Reiniciar</button>
+        <button id="menuBtn">Volver al menú</button>
+      </div>
+
+    </div>
+
+    <footer class="footer-controls">
+      Controles:
+      Flechas para mover · A/D para girar la dirección · Espacio para chutar
+    </footer>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
